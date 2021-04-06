@@ -1,0 +1,54 @@
+{
+  "name": "Restaurant",
+  "fields": [
+    {
+      "fieldName": "nomResto",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[a-zA-Z_ ]+"
+    },
+    {
+      "fieldName": "fraisLivraison",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresseResto",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[a-zA-Z0-9_ ]+"
+    },
+    {
+      "fieldName": "codePResto",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "pattern"],
+      "fieldValidateRulesMinlength": "5",
+      "fieldValidateRulesMaxlength": "5",
+      "fieldValidateRulesPattern": "[0-9]+"
+    },
+    {
+      "fieldName": "villeResto",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[a-zA-Z_ ]+"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "plat",
+      "otherEntityRelationshipName": "restaurant",
+      "relationshipName": "plat",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "restaurant",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["coopcycle"],
+  "changelogDate": "20210406185709"
+}
