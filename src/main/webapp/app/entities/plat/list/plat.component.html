@@ -1,0 +1,93 @@
+<div>
+  <h2 id="page-heading" data-cy="PlatHeading">
+    <span jhiTranslate="coopcycleApp.plat.home.title">Plats</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="coopcycleApp.plat.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-plat"
+        [routerLink]="['/plat/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="coopcycleApp.plat.home.createLabel"> Create a new Plat </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="plats?.length === 0">
+    <span jhiTranslate="coopcycleApp.plat.home.notFound">No plats found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="plats && plats.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.plat.nomPlat">Nom Plat</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.plat.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.plat.prix">Prix</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.plat.photo">Photo</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.plat.restaurant">Restaurant</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.plat.panier">Panier</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plat of plats; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/plat', plat.id, 'view']">{{ plat.id }}</a>
+          </td>
+          <td>{{ plat.nomPlat }}</td>
+          <td>{{ plat.description }}</td>
+          <td>{{ plat.prix }}</td>
+          <td>
+            <a *ngIf="plat.photo" (click)="openFile(plat.photo, plat.photoContentType)">
+              <img [src]="'data:' + plat.photoContentType + ';base64,' + plat.photo" style="max-height: 30px" alt="plat image" />
+            </a>
+            <span *ngIf="plat.photo">{{ plat.photoContentType }}, {{ byteSize(plat.photo) }}</span>
+          </td>
+          <td>
+            <span *ngFor="let restaurant of plat.restaurants; let last = last">
+              <a class="form-control-static" [routerLink]="['/restaurant', restaurant.id, 'view']">{{ restaurant.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let panier of plat.paniers; let last = last">
+              <a class="form-control-static" [routerLink]="['/panier', panier.id, 'view']">{{ panier.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/plat', plat.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/plat', plat.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(plat)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
