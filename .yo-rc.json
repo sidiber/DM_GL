@@ -5,7 +5,7 @@
     "baseName": "coopcycle",
     "packageName": "fr.polytech.info4",
     "packageFolder": "fr/polytech/info4",
-    "serverPort": 8080,
+    "serverPort": "8080",
     "serviceDiscoveryType": false,
     "authenticationType": "jwt",
     "cacheProvider": "ehcache",
@@ -23,7 +23,7 @@
     "testFrameworks": [],
     "enableTranslation": true,
     "nativeLanguage": "fr",
-    "languages": ["fr", "en"],
+    "languages": ["fr"],
     "clientFramework": "angularX",
     "jhiPrefix": "jhi",
     "withAdminUi": true,
@@ -42,7 +42,9 @@
     "jwtSecretKey": "ZDMzYWZmOWY0YjhhYjM2ZWJhMWJjN2EwZTgzZmM4ZmQ4ODM0YzNhZTZlOTU4MTFmOTRjZTRlZThjMWM4YmI5ZGI4NmM1YjQxZGNkZmE3YWE5NzkxZWJjNjBmNTMzYjgwYjQyZGFmNTIwNjI0NmM2ZDg2MTU4OTQ4ZjMyOGNkNGI=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Compte", "Panier", "Course", "SystemePaiement", "Plat", "Restaurant", "Cooperative"],
+    "lastLiquibaseTimestamp": 1617734324000
   },
   "git-provider": "GitHub",
   "git-company": "sidiber",
