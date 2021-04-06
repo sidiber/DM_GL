@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="compte">
+      <h2 data-cy="compteDetailsHeading"><span jhiTranslate="coopcycleApp.compte.detail.title">Compte</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ compte.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.nom">Nom</span></dt>
+        <dd>
+          <span>{{ compte.nom }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.prenom">Prenom</span></dt>
+        <dd>
+          <span>{{ compte.prenom }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.email">Email</span></dt>
+        <dd>
+          <span>{{ compte.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ compte.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.addressCompte">Address Compte</span></dt>
+        <dd>
+          <span>{{ compte.addressCompte }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.codePCompte">Code P Compte</span></dt>
+        <dd>
+          <span>{{ compte.codePCompte }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.villeCompte">Ville Compte</span></dt>
+        <dd>
+          <span>{{ compte.villeCompte }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.compte.membrede">Membrede</span></dt>
+        <dd>
+          <div *ngIf="compte.membrede">
+            <a [routerLink]="['/cooperative', compte.membrede?.id, 'view']">{{ compte.membrede?.nomCoop }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/compte', compte.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

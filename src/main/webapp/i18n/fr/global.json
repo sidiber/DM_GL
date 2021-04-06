@@ -7,6 +7,13 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entités",
+        "compte": "Compte",
+        "panier": "Panier",
+        "course": "Course",
+        "systemePaiement": "Systeme Paiement",
+        "plat": "Plat",
+        "restaurant": "Restaurant",
+        "cooperative": "Cooperative",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
