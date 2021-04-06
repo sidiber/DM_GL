@@ -1,0 +1,11 @@
+{
+  "coopcycleApp": {
+    "EtatCourse": {
+      "null": "",
+      "CREE": "CREE",
+      "TRAITEMENT": "TRAITEMENT",
+      "ANNULEE": "ANNULEE",
+      "FINALISEE": "FINALISEE"
+    }
+  }
+}
