@@ -1,0 +1,93 @@
+<div>
+  <h2 id="page-heading" data-cy="CourseHeading">
+    <span jhiTranslate="coopcycleApp.course.home.title">Courses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="coopcycleApp.course.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-course"
+        [routerLink]="['/course/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="coopcycleApp.course.home.createLabel"> Create a new Course </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="courses?.length === 0">
+    <span jhiTranslate="coopcycleApp.course.home.notFound">No courses found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="courses && courses.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.course.createdAt">Created At</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.course.etat">Etat</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.course.startTime">Start Time</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.course.endTime">End Time</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.course.montant">Montant</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.course.plat">Plat</span></th>
+          <th scope="col"><span jhiTranslate="coopcycleApp.course.livre">Livre</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/course', course.id, 'view']">{{ course.id }}</a>
+          </td>
+          <td>{{ course.createdAt | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'coopcycleApp.EtatCourse.' + course.etat }}">{{ course.etat }}</td>
+          <td>{{ course.startTime | formatMediumDatetime }}</td>
+          <td>{{ course.endTime | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="course.montant">
+              <a [routerLink]="['/panier', course.montant?.id, 'view']">{{ course.montant?.prixTotal }}</a>
+            </div>
+          </td>
+          <td>
+            <span *ngFor="let plat of course.plats; let last = last">
+              <a class="form-control-static" [routerLink]="['/plat', plat.id, 'view']">{{ plat.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <div *ngIf="course.livre">
+              <a [routerLink]="['/compte', course.livre?.id, 'view']">{{ course.livre?.nom }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/course', course.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(course)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

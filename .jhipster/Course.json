@@ -1,0 +1,58 @@
+{
+  "name": "Course",
+  "fields": [
+    {
+      "fieldName": "createdAt",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "etat",
+      "fieldType": "EtatCourse",
+      "fieldValues": "CREE,TRAITEMENT,ANNULEE,FINALISEE"
+    },
+    {
+      "fieldName": "startTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endTime",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "panier",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "montant",
+      "otherEntityField": "prixTotal",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "plat",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "plat",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "compte",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "livre",
+      "otherEntityField": "nom"
+    }
+  ],
+  "entityTableName": "course",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["coopcycle"],
+  "changelogDate": "20210406174419"
+}

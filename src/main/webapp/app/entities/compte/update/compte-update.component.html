@@ -1,0 +1,227 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-compte-heading" data-cy="CompteCreateUpdateHeading" jhiTranslate="coopcycleApp.compte.home.createOrEditLabel">
+        Create or edit a Compte
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.nom" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          <div *ngIf="editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nom')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('nom')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Nom' }"
+            >
+              This field should follow pattern for "Nom".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.prenom" for="field_prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          <div *ngIf="editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('prenom')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('prenom')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Prenom' }"
+            >
+              This field should follow pattern for "Prenom".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('email')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('email')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Email' }"
+            >
+              This field should follow pattern for "Email".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.phoneNumber" for="field_phoneNumber">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+          <div *ngIf="editForm.get('phoneNumber')!.invalid && (editForm.get('phoneNumber')!.dirty || editForm.get('phoneNumber')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('phoneNumber')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 10 }"
+            >
+              This field is required to be at least 10 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('phoneNumber')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('phoneNumber')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Phone Number' }"
+            >
+              This field should follow pattern for "Phone Number".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.addressCompte" for="field_addressCompte"
+            >Address Compte</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="addressCompte"
+            id="field_addressCompte"
+            data-cy="addressCompte"
+            formControlName="addressCompte"
+          />
+          <div
+            *ngIf="
+              editForm.get('addressCompte')!.invalid && (editForm.get('addressCompte')!.dirty || editForm.get('addressCompte')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('addressCompte')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Address Compte' }"
+            >
+              This field should follow pattern for "Address Compte".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.codePCompte" for="field_codePCompte">Code P Compte</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codePCompte"
+            id="field_codePCompte"
+            data-cy="codePCompte"
+            formControlName="codePCompte"
+          />
+          <div *ngIf="editForm.get('codePCompte')!.invalid && (editForm.get('codePCompte')!.dirty || editForm.get('codePCompte')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePCompte')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 5 }"
+            >
+              This field is required to be at least 5 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePCompte')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 5 }"
+            >
+              This field cannot be longer than 5 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePCompte')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Code P Compte' }"
+            >
+              This field should follow pattern for "Code P Compte".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.villeCompte" for="field_villeCompte">Ville Compte</label>
+          <input
+            type="text"
+            class="form-control"
+            name="villeCompte"
+            id="field_villeCompte"
+            data-cy="villeCompte"
+            formControlName="villeCompte"
+          />
+          <div *ngIf="editForm.get('villeCompte')!.invalid && (editForm.get('villeCompte')!.dirty || editForm.get('villeCompte')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('villeCompte')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Ville Compte' }"
+            >
+              This field should follow pattern for "Ville Compte".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.compte.membre" for="field_membre">Membre</label>
+          <select class="form-control" id="field_membre" data-cy="membre" name="membre" formControlName="membre">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="cooperativeOption.id === editForm.get('membre')!.value?.id ? editForm.get('membre')!.value : cooperativeOption"
+              *ngFor="let cooperativeOption of cooperativesSharedCollection; trackBy: trackCooperativeById"
+            >
+              {{ cooperativeOption.nomCoop }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
