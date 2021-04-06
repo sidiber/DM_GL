@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="plat">
+      <h2 data-cy="platDetailsHeading"><span jhiTranslate="coopcycleApp.plat.detail.title">Plat</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ plat.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.plat.nomPlat">Nom Plat</span></dt>
+        <dd>
+          <span>{{ plat.nomPlat }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.plat.description">Description</span></dt>
+        <dd>
+          <span>{{ plat.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.plat.prix">Prix</span></dt>
+        <dd>
+          <span>{{ plat.prix }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.plat.photo">Photo</span></dt>
+        <dd>
+          <div *ngIf="plat.photo">
+            <a (click)="openFile(plat.photo, plat.photoContentType)">
+              <img [src]="'data:' + plat.photoContentType + ';base64,' + plat.photo" style="max-width: 100%" alt="plat image" />
+            </a>
+            {{ plat.photoContentType }}, {{ byteSize(plat.photo) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.plat.restaurant">Restaurant</span></dt>
+        <dd>
+          <span *ngFor="let restaurant of plat.restaurants; let last = last">
+            <a [routerLink]="['/restaurant', restaurant?.id, 'view']">{{ restaurant.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.plat.panier">Panier</span></dt>
+        <dd>
+          <span *ngFor="let panier of plat.paniers; let last = last">
+            <a [routerLink]="['/panier', panier?.id, 'view']">{{ panier.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/plat', plat.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
