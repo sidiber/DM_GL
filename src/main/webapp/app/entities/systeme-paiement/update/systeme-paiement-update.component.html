@@ -1,0 +1,167 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-systeme-paiement-heading"
+        data-cy="SystemePaiementCreateUpdateHeading"
+        jhiTranslate="coopcycleApp.systemePaiement.home.createOrEditLabel"
+      >
+        Create or edit a Systeme Paiement
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.systemePaiement.numCarte" for="field_numCarte">Num Carte</label>
+          <input type="text" class="form-control" name="numCarte" id="field_numCarte" data-cy="numCarte" formControlName="numCarte" />
+          <div *ngIf="editForm.get('numCarte')!.invalid && (editForm.get('numCarte')!.dirty || editForm.get('numCarte')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numCarte')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 16 }"
+            >
+              This field is required to be at least 16 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numCarte')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 16 }"
+            >
+              This field cannot be longer than 16 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('numCarte')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Num Carte' }"
+            >
+              This field should follow pattern for "Num Carte".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.systemePaiement.dateExpiration" for="field_dateExpiration"
+            >Date Expiration</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateExpiration"
+              data-cy="dateExpiration"
+              type="datetime-local"
+              class="form-control"
+              name="dateExpiration"
+              formControlName="dateExpiration"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div
+            *ngIf="
+              editForm.get('dateExpiration')!.invalid && (editForm.get('dateExpiration')!.dirty || editForm.get('dateExpiration')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateExpiration')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateExpiration')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.systemePaiement.typeCarte" for="field_typeCarte">Type Carte</label>
+          <input type="text" class="form-control" name="typeCarte" id="field_typeCarte" data-cy="typeCarte" formControlName="typeCarte" />
+          <div *ngIf="editForm.get('typeCarte')!.invalid && (editForm.get('typeCarte')!.dirty || editForm.get('typeCarte')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('typeCarte')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 10 }"
+            >
+              This field cannot be longer than 10 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('typeCarte')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Type Carte' }"
+            >
+              This field should follow pattern for "Type Carte".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.systemePaiement.montant" for="field_montant">Montant</label>
+          <input type="text" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.systemePaiement.dateFacture" for="field_dateFacture"
+            >Date Facture</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateFacture"
+              data-cy="dateFacture"
+              type="datetime-local"
+              class="form-control"
+              name="dateFacture"
+              formControlName="dateFacture"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dateFacture')!.invalid && (editForm.get('dateFacture')!.dirty || editForm.get('dateFacture')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateFacture')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateFacture')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

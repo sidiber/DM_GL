@@ -1,0 +1,160 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-course-heading" data-cy="CourseCreateUpdateHeading" jhiTranslate="coopcycleApp.course.home.createOrEditLabel">
+        Create or edit a Course
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.course.createdAt" for="field_createdAt">Created At</label>
+          <div class="d-flex">
+            <input
+              id="field_createdAt"
+              data-cy="createdAt"
+              type="datetime-local"
+              class="form-control"
+              name="createdAt"
+              formControlName="createdAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('createdAt')!.invalid && (editForm.get('createdAt')!.dirty || editForm.get('createdAt')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('createdAt')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('createdAt')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.course.etat" for="field_etat">Etat</label>
+          <select class="form-control" name="etat" formControlName="etat" id="field_etat" data-cy="etat">
+            <option [ngValue]="null">{{ 'coopcycleApp.EtatCourse.null' | translate }}</option>
+            <option value="CREE">{{ 'coopcycleApp.EtatCourse.CREE' | translate }}</option>
+            <option value="TRAITEMENT">{{ 'coopcycleApp.EtatCourse.TRAITEMENT' | translate }}</option>
+            <option value="ANNULEE">{{ 'coopcycleApp.EtatCourse.ANNULEE' | translate }}</option>
+            <option value="FINALISEE">{{ 'coopcycleApp.EtatCourse.FINALISEE' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.course.startTime" for="field_startTime">Start Time</label>
+          <div class="d-flex">
+            <input
+              id="field_startTime"
+              data-cy="startTime"
+              type="datetime-local"
+              class="form-control"
+              name="startTime"
+              formControlName="startTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('startTime')!.invalid && (editForm.get('startTime')!.dirty || editForm.get('startTime')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('startTime')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('startTime')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.course.endTime" for="field_endTime">End Time</label>
+          <div class="d-flex">
+            <input
+              id="field_endTime"
+              data-cy="endTime"
+              type="datetime-local"
+              class="form-control"
+              name="endTime"
+              formControlName="endTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.course.montant" for="field_montant">Montant</label>
+          <select class="form-control" id="field_montant" data-cy="montant" name="montant" formControlName="montant">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="panierOption.id === editForm.get('montant')!.value?.id ? editForm.get('montant')!.value : panierOption"
+              *ngFor="let panierOption of montantsCollection; trackBy: trackPanierById"
+            >
+              {{ panierOption.prixTotal }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label jhiTranslate="coopcycleApp.course.plat" for="field_plats">Plat</label>
+          <select class="form-control" id="field_plats" data-cy="plat" multiple name="plats" formControlName="plats">
+            <option
+              [ngValue]="getSelectedPlat(platOption, editForm.get('plats')!.value)"
+              *ngFor="let platOption of platsSharedCollection; trackBy: trackPlatById"
+            >
+              {{ platOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.course.livre" for="field_livre">Livre</label>
+          <select class="form-control" id="field_livre" data-cy="livre" name="livre" formControlName="livre">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="compteOption.id === editForm.get('livre')!.value?.id ? editForm.get('livre')!.value : compteOption"
+              *ngFor="let compteOption of comptesSharedCollection; trackBy: trackCompteById"
+            >
+              {{ compteOption.nom }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

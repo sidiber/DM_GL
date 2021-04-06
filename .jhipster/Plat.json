@@ -1,0 +1,59 @@
+{
+  "name": "Plat",
+  "fields": [
+    {
+      "fieldName": "nomPlat",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "pattern"],
+      "fieldValidateRulesPattern": "^[a-zA-Z_ ]$"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "prix",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "restaurant",
+      "otherEntityRelationshipName": "plat",
+      "relationshipName": "restaurant",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "panier",
+      "otherEntityRelationshipName": "plat",
+      "relationshipName": "panier",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "plat",
+      "relationshipName": "course",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "plat",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["coopcycle"],
+  "changelogDate": "20210406184505"
+}
