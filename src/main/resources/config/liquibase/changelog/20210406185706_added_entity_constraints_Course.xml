@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Course.
+    -->
+    <changeSet id="20210406185706-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="montant_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course__montant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="panier"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="rel_course__plat"
+                                 constraintName="fk_rel_course__plat__course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="plat_id"
+                                 baseTableName="rel_course__plat"
+                                 constraintName="fk_rel_course__plat__plat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="plat"/>
+
+        <addForeignKeyConstraint baseColumnNames="livre_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course__livre_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="compte"/>
+    </changeSet>
+</databaseChangeLog>
