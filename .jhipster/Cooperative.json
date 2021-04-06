@@ -1,0 +1,35 @@
+{
+  "name": "Cooperative",
+  "fields": [
+    {
+      "fieldName": "nomCoop",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^[a-zA-Z_ ]*$"
+    },
+    {
+      "fieldName": "villeCoop",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^[a-zA-Z_ ]*$"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "compte",
+      "otherEntityRelationshipName": "membre",
+      "relationshipName": "compte"
+    }
+  ],
+  "entityTableName": "cooperative",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["coopcycle"],
+  "changelogDate": "20210406174423"
+}
