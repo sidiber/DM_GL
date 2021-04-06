@@ -48,6 +48,23 @@ public class CacheConfiguration {
             createCache(cm, fr.polytech.info4.domain.User.class.getName());
             createCache(cm, fr.polytech.info4.domain.Authority.class.getName());
             createCache(cm, fr.polytech.info4.domain.User.class.getName() + ".authorities");
+            createCache(cm, fr.polytech.info4.domain.Compte.class.getName());
+            createCache(cm, fr.polytech.info4.domain.Compte.class.getName() + ".paniers");
+            createCache(cm, fr.polytech.info4.domain.Compte.class.getName() + ".courses");
+            createCache(cm, fr.polytech.info4.domain.Panier.class.getName());
+            createCache(cm, fr.polytech.info4.domain.Panier.class.getName() + ".plats");
+            createCache(cm, fr.polytech.info4.domain.Course.class.getName());
+            createCache(cm, fr.polytech.info4.domain.Course.class.getName() + ".plats");
+            createCache(cm, fr.polytech.info4.domain.SystemePaiement.class.getName());
+            createCache(cm, fr.polytech.info4.domain.SystemePaiement.class.getName() + ".paniers");
+            createCache(cm, fr.polytech.info4.domain.Plat.class.getName());
+            createCache(cm, fr.polytech.info4.domain.Plat.class.getName() + ".restaurants");
+            createCache(cm, fr.polytech.info4.domain.Plat.class.getName() + ".paniers");
+            createCache(cm, fr.polytech.info4.domain.Plat.class.getName() + ".courses");
+            createCache(cm, fr.polytech.info4.domain.Restaurant.class.getName());
+            createCache(cm, fr.polytech.info4.domain.Restaurant.class.getName() + ".plats");
+            createCache(cm, fr.polytech.info4.domain.Cooperative.class.getName());
+            createCache(cm, fr.polytech.info4.domain.Cooperative.class.getName() + ".comptes");
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="course">
+      <h2 data-cy="courseDetailsHeading"><span jhiTranslate="coopcycleApp.course.detail.title">Course</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ course.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ course.createdAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.etat">Etat</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'coopcycleApp.EtatCourse.' + course.etat }}">{{ course.etat }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.startTime">Start Time</span></dt>
+        <dd>
+          <span>{{ course.startTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.endTime">End Time</span></dt>
+        <dd>
+          <span>{{ course.endTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.montant">Montant</span></dt>
+        <dd>
+          <div *ngIf="course.montant">
+            <a [routerLink]="['/panier', course.montant?.id, 'view']">{{ course.montant?.prixTotal }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.plat">Plat</span></dt>
+        <dd>
+          <span *ngFor="let plat of course.plats; let last = last">
+            <a [routerLink]="['/plat', plat?.id, 'view']">{{ plat.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="coopcycleApp.course.estlivre">Estlivre</span></dt>
+        <dd>
+          <div *ngIf="course.estlivre">
+            <a [routerLink]="['/compte', course.estlivre?.id, 'view']">{{ course.estlivre?.nom }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/course', course.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
