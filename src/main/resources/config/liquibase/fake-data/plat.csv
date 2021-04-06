@@ -1,0 +1,11 @@
+id;nom_plat;description;prix;photo;photo_content_type
+1;"q";../fake-data/blob/hipster.txt;Agent copy;../fake-data/blob/hipster.png;image/png
+2;"t";../fake-data/blob/hipster.txt;Soft Consultant firewall;../fake-data/blob/hipster.png;image/png
+3;"G";../fake-data/blob/hipster.txt;hacking driver invoice;../fake-data/blob/hipster.png;image/png
+4;"_";../fake-data/blob/hipster.txt;Rhône-Alpes Chips;../fake-data/blob/hipster.png;image/png
+5;"G";../fake-data/blob/hipster.txt;monitor Coordinateur;../fake-data/blob/hipster.png;image/png
+6;"r";../fake-data/blob/hipster.txt;Bedfordshire;../fake-data/blob/hipster.png;image/png
+7;"k";../fake-data/blob/hipster.txt;digital Buckinghamshire;../fake-data/blob/hipster.png;image/png
+8;"O";../fake-data/blob/hipster.txt;salmon;../fake-data/blob/hipster.png;image/png
+9;"e";../fake-data/blob/hipster.txt;c sensor red;../fake-data/blob/hipster.png;image/png
+10;" ";../fake-data/blob/hipster.txt;transmit Franche-Comté a;../fake-data/blob/hipster.png;image/png
