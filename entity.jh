@@ -1,0 +1,105 @@
+
+application {
+  config {
+    baseName coopcycle,
+    applicationType monolith,
+    packageName fr.polytech.info4,
+    authenticationType jwt,
+    prodDatabaseType mysql,
+    clientFramework angularX
+  }
+  entities *
+}
+
+enum Role {
+	COURSIER, COMMERCANT, CLIENT
+}
+
+
+entity Compte {
+	nom String required pattern(/^[a-zA-Z_ ]$/) ,
+    prenom String required pattern(/^[a-zA-Z_ ]$/)  ,
+	email String required pattern(/^([a-zA-Z0-9_\-\.]+)@(|hotmail|yahoo|imag|gmail|etu.univ-grenoble-alpes|univ-grenoble-alpes+)\.(fr|com)$/) ,
+    
+  	phoneNumber String minlength(10) maxlength(10) pattern(/^[0-9]$/)	, 
+  	addressCompte String pattern(/^[a-zA-Z0-9_ ]$/) ,
+  	codePCompte String minlength(5) maxlength(5) pattern(/^[0-9]$/),
+  	villeCompte String pattern(/^[a-zA-Z0-9_ ]$/) 
+  	}
+
+entity Panier {
+	prixTotal String
+}
+
+enum EtatCourse
+{
+CREE, TRAITEMENT, ANNULEE, FINALISEE
+}
+
+entity Course{
+
+	createdAt Instant required
+     	etat EtatCourse,
+  	startTime Instant required,
+  	endTime Instant
+ 
+  
+}
+
+
+entity SystemePaiement{
+  numCarte String minlength(16) maxlength(16) pattern(/^[0-9_ ]$/),
+  dateExpiration Instant required,
+  typeCarte String maxlength(10) pattern(/^[a-zA-Z_ ]$/),
+  montant String,
+  dateFacture Instant required
+   
+}
+
+entity Plat{
+  nomPlat String required pattern(/^[a-zA-Z_ ]$/) ,
+  description TextBlob,
+  prix  String required,
+  photo ImageBlob 
+}
+
+entity Restaurant{
+  nomResto String pattern(/^[a-zA-Z_ ]$/) ,
+  fraisLivraison String ,
+  adresseResto String pattern(/^[a-zA-Z0-9_ ]$/) ,
+  codePResto String minlength(5) maxlength(5) pattern(/^[0-9]/),
+  villeResto String pattern(/^[a-zA-Z_ ]$/) 
+}
+
+entity Cooperative{
+ nomCoop String pattern(/^[a-zA-Z_ ]$/) ,
+ villeCoop String pattern(/^[a-zA-Z_ ]$/) 
+}
+
+
+relationship OneToMany {  
+  Compte to Panier{constitue(nom)},
+  Compte to Course{livre(nom)},
+  SystemePaiement to Panier{estValidePar(numCarte)},
+  Cooperative to Compte{membre(nomCoop)}
+  
+}
+relationship ManyToMany{
+Course to Plat,
+Plat to Restaurant,
+Plat to Panier
+
+}
+
+relationship OneToOne{
+Course{montant(prixTotal)} to Panier
+}
+
+ 
+
+dto * with mapstruct
+service * with serviceImpl
+
+filter*
+
+
