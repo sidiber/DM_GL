@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Plat.
+    -->
+    <changeSet id="20210406181647-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="plat_id"
+                                 baseTableName="rel_plat__restaurant"
+                                 constraintName="fk_rel_plat__restaurant__plat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="plat"/>
+
+        <addForeignKeyConstraint baseColumnNames="restaurant_id"
+                                 baseTableName="rel_plat__restaurant"
+                                 constraintName="fk_rel_plat__restaurant__restaurant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restaurant"/>
+
+        <addForeignKeyConstraint baseColumnNames="plat_id"
+                                 baseTableName="rel_plat__panier"
+                                 constraintName="fk_rel_plat__panier__plat_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="plat"/>
+
+        <addForeignKeyConstraint baseColumnNames="panier_id"
+                                 baseTableName="rel_plat__panier"
+                                 constraintName="fk_rel_plat__panier__panier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="panier"/>
+    </changeSet>
+</databaseChangeLog>

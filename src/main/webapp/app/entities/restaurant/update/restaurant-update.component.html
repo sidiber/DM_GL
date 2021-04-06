@@ -1,0 +1,117 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-restaurant-heading" data-cy="RestaurantCreateUpdateHeading" jhiTranslate="coopcycleApp.restaurant.home.createOrEditLabel">
+        Create or edit a Restaurant
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.restaurant.nomResto" for="field_nomResto">Nom Resto</label>
+          <input type="text" class="form-control" name="nomResto" id="field_nomResto" data-cy="nomResto" formControlName="nomResto" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.restaurant.fraisLivraison" for="field_fraisLivraison"
+            >Frais Livraison</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fraisLivraison"
+            id="field_fraisLivraison"
+            data-cy="fraisLivraison"
+            formControlName="fraisLivraison"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.restaurant.adresseResto" for="field_adresseResto"
+            >Adresse Resto</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="adresseResto"
+            id="field_adresseResto"
+            data-cy="adresseResto"
+            formControlName="adresseResto"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.restaurant.codePResto" for="field_codePResto">Code P Resto</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codePResto"
+            id="field_codePResto"
+            data-cy="codePResto"
+            formControlName="codePResto"
+          />
+          <div *ngIf="editForm.get('codePResto')!.invalid && (editForm.get('codePResto')!.dirty || editForm.get('codePResto')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePResto')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 5 }"
+            >
+              This field is required to be at least 5 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePResto')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 5 }"
+            >
+              This field cannot be longer than 5 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('codePResto')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Code P Resto' }"
+            >
+              This field should follow pattern for "Code P Resto".
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="coopcycleApp.restaurant.villeResto" for="field_villeResto">Ville Resto</label>
+          <input
+            type="text"
+            class="form-control"
+            name="villeResto"
+            id="field_villeResto"
+            data-cy="villeResto"
+            formControlName="villeResto"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
