@@ -1,0 +1,52 @@
+{
+  "name": "SystemePaiement",
+  "fields": [
+    {
+      "fieldName": "numCarte",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "pattern"],
+      "fieldValidateRulesMinlength": "16",
+      "fieldValidateRulesMaxlength": "16",
+      "fieldValidateRulesPattern": "^[0-9_ ]+$"
+    },
+    {
+      "fieldName": "dateExpiration",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "typeCarte",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength", "pattern"],
+      "fieldValidateRulesMaxlength": "10",
+      "fieldValidateRulesPattern": "^[a-zA-Z_ ]+$"
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateFacture",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "panier",
+      "otherEntityRelationshipName": "estValidePar",
+      "relationshipName": "panier"
+    }
+  ],
+  "entityTableName": "systeme_paiement",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": ["coopcycle"],
+  "changelogDate": "20210406190608"
+}
